@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales & Analytics Reports – CampusBite Admin</title>
+  <meta name="description" content="Canteen business analytics, peak hours, and category sales performance." />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Dark Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h2>CampusBite</h2>
+          <span class="brand-badge">Canteen Staff</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard.html" class="nav-item">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/admin/orders.html" class="nav-item">
+          <span class="icon">📋</span>
+          <span>Orders</span>
+        </a>
+        <a href="/admin/menu.html" class="nav-item">
+          <span class="icon">🍔</span>
+          <span>Menu Items</span>
+        </a>
+        <a href="/admin/reports.html" class="nav-item active">
+          <span class="icon">📈</span>
+          <span>Reports & Trends</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div>
+            <div class="user-name">Chef Manager</div>
+            <div class="user-role">Canteen Staff</div>
+          </div>
+          <a href="/login.html" title="Sign Out" style="color: #EF4444; text-decoration: none; font-size: 1.1rem;">⏻</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <h1>Analytics & Financial Reports</h1>
+          <p>Comprehensive canteen performance metrics and demand forecasting</p>
+        </div>
+
+        <div class="header-right">
+          <button class="admin-btn admin-btn-outline" onclick="window.print()">
+            🖨️ Export / Print Report
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <!-- Highlights Stats Grid -->
+        <div class="report-highlight-grid">
+          <div class="report-stat-card">
+            <div class="report-stat-label">Total Cumulative Orders</div>
+            <div class="report-stat-val" id="repTotalOrders">162</div>
+            <div style="font-size: 0.8rem; color: var(--green); font-weight: 600; margin-top: 4px;">↑ +22% this week</div>
+          </div>
+
+          <div class="report-stat-card">
+            <div class="report-stat-label">Total Revenue Generated</div>
+            <div class="report-stat-val" id="repTotalRevenue" style="color: var(--orange);">₹14,740</div>
+            <div style="font-size: 0.8rem; color: var(--green); font-weight: 600; margin-top: 4px;">Zero uncollected waste</div>
+          </div>
+
+          <div class="report-stat-card">
+            <div class="report-stat-label">Most Ordered Dish</div>
+            <div class="report-stat-val" id="repMostOrdered" style="font-size: 1.25rem;">Veg Burger</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Followed by Masala Dosa & Samosa</div>
+          </div>
+        </div>
+
+        <!-- Second Row Highlights -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+          <div class="report-stat-card">
+            <div class="report-stat-label">Peak Ordering Window</div>
+            <div class="report-stat-val" id="repPeakTime" style="font-size: 1.25rem; color: var(--amber);">11:00 AM – 12:30 PM</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Morning tea break & start of lunch shift</div>
+          </div>
+
+          <div class="report-stat-card">
+            <div class="report-stat-label">Average Order Fulfillment Time</div>
+            <div class="report-stat-val" style="font-size: 1.25rem; color: var(--green);">6.4 Minutes</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Down from 18 mins with physical queues</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid (2 columns: Revenue Trend + Category Doughnut) -->
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+          <!-- Revenue Trend (Line Chart) -->
+          <div class="admin-card" style="margin-bottom: 0;">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Weekly Revenue Trend (₹)</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Daily gross intake through pre-order system</p>
+              </div>
+            </div>
+            <div class="chart-wrap" style="height: 300px;">
+              <canvas id="revenueTrendChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Category Performance (Doughnut Chart) -->
+          <div class="admin-card" style="margin-bottom: 0;">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Category Sales Share</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Percentage split by meal category</p>
+              </div>
+            </div>
+            <div class="chart-wrap" style="height: 300px;">
+              <canvas id="categoryReportChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

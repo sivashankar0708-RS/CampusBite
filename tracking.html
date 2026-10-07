@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Order Tracking – CampusBite</title>
+  <meta name="description" content="Track your college canteen order live with instant digital token display." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="/index.html" class="brand-logo">
+        <div class="brand-icon">🍽️</div>
+        <span>Campus<span class="accent">Bite</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/menu.html" class="nav-link">Menu</a></li>
+        <li><a href="/orders.html" class="nav-link active">My Orders</a></li>
+        <li><a href="/profile.html" class="nav-link">Profile</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/menu.html" class="btn btn-outline btn-sm">+ New Order</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: 20px; padding-bottom: 60px;">
+    <div class="success-card">
+      <div class="success-badge-icon">✓</div>
+      <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">ORDER CONFIRMED</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Your order is registered with the canteen kitchen counter.
+      </p>
+
+      <!-- Large Token Display -->
+      <div class="token-hero-box">
+        <div class="token-hero-title">Your Pickup Token Number</div>
+        <div class="token-hero-number" id="trackToken">C-105</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+          Show this token at <strong>Counter 2</strong> when status is <span style="color: var(--success-green); font-weight: 700;">READY</span>
+        </div>
+      </div>
+
+      <!-- Current Status & ETA -->
+      <div style="display: flex; justify-content: space-around; align-items: center; background: var(--bg-muted); padding: 16px; border-radius: var(--radius-md); margin-bottom: 24px;">
+        <div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Current Status</div>
+          <div style="margin-top: 4px;">
+            <span class="status-badge preparing" id="trackStatusBadge">PREPARING</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Estimated Pickup</div>
+          <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-charcoal); font-family: var(--font-mono); margin-top: 2px;" id="trackEta">
+            ~8-12 minutes
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Message -->
+      <div id="trackStatusMsg" style="font-size: 0.95rem; font-weight: 600; color: var(--primary-orange); margin-bottom: 28px;">
+        Chefs are currently preparing your hot food fresh.
+      </div>
+
+      <!-- Live Timeline Progress -->
+      <div class="tracking-timeline">
+        <div class="tracking-timeline-progress" id="trackProgressBar" style="width: 48%;"></div>
+
+        <div class="timeline-step completed" id="step-placed">
+          <div class="step-node">✓</div>
+          <span class="step-title">Order Placed</span>
+        </div>
+
+        <div class="timeline-step active" id="step-preparing">
+          <div class="step-node">●</div>
+          <span class="step-title">Preparing</span>
+        </div>
+
+        <div class="timeline-step" id="step-ready">
+          <div class="step-node">○</div>
+          <span class="step-title">Ready</span>
+        </div>
+
+        <div class="timeline-step" id="step-collected">
+          <div class="step-node">○</div>
+          <span class="step-title">Collected</span>
+        </div>
+      </div>
+
+      <!-- Order Details Container -->
+      <div id="trackOrderDetails">
+        <!-- Rendered by orders.js renderTrackingPage() -->
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 14px; justify-content: center; margin-top: 32px;">
+        <a href="/orders.html" class="btn btn-secondary">View All My Orders</a>
+        <a href="/menu.html" class="btn btn-primary">Order More Food →</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusBite – College Canteen Pre-Order System</div>
+        <div>Live Sync via LocalStorage & Event Stream</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/orders.js"></script>
+</body>
+</html>

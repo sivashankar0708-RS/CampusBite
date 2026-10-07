@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout – CampusBite</title>
+  <meta name="description" content="Confirm your canteen pre-order details and student credentials." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="/index.html" class="brand-logo">
+        <div class="brand-icon">🍽️</div>
+        <span>Campus<span class="accent">Bite</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/menu.html" class="nav-link">Menu</a></li>
+        <li><a href="/cart.html" class="nav-link">Cart Tray</a></li>
+        <li><a href="/orders.html" class="nav-link">My Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/cart.html" class="btn btn-secondary btn-sm">← Back To Tray</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: 36px; padding-bottom: 60px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Checkout & Verification</h1>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 28px;">
+        Verify student credentials to generate your live pickup token.
+      </p>
+
+      <form id="checkoutForm">
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px;">
+          <!-- Left: Student Details & Payment -->
+          <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 28px; box-shadow: var(--shadow-sm);">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 18px;">Student Information</h2>
+
+            <div class="form-group">
+              <label class="form-label" for="studentName">Student Full Name *</label>
+              <input type="text" id="studentName" name="studentName" class="form-control" placeholder="e.g. Aarav Sharma" required />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="studentId">Student / Roll ID *</label>
+                <input type="text" id="studentId" name="studentId" class="form-control" placeholder="e.g. BCA2024018" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="department">Department / Course *</label>
+                <input type="text" id="department" name="department" class="form-control" placeholder="e.g. BCA / B.Tech / BBA" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="year">Academic Year *</label>
+                <select id="year" name="year" class="form-control" required>
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year" selected>2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                  <option value="Faculty / Staff">Faculty / Staff</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">Mobile Number *</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="10-digit number" pattern="[0-9]{10}" required />
+              </div>
+            </div>
+
+            <!-- Payment Options -->
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-light);">
+              <label class="form-label" style="margin-bottom: 12px; font-size: 0.95rem;">Payment Method *</label>
+              
+              <div class="payment-options-grid">
+                <div class="payment-radio-card selected">
+                  <input type="radio" name="paymentMethod" value="Pay At Canteen" checked id="payCanteen" />
+                  <span style="font-size: 1.5rem;">💵</span>
+                  <div style="font-size: 0.88rem; font-weight: 700;">Pay At Canteen</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Cash / Counter Card</div>
+                </div>
+
+                <div class="payment-radio-card">
+                  <input type="radio" name="paymentMethod" value="UPI Demo" id="payUPI" />
+                  <span style="font-size: 1.5rem;">📱</span>
+                  <div style="font-size: 0.88rem; font-weight: 700;">UPI Demo</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Instant Scan (Demo)</div>
+                </div>
+
+                <div class="payment-radio-card">
+                  <input type="radio" name="paymentMethod" value="Campus Wallet Demo" id="payWallet" />
+                  <span style="font-size: 1.5rem;">💳</span>
+                  <div style="font-size: 0.88rem; font-weight: 700;">Campus Wallet</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Balance: ₹450</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Order Review & Button -->
+          <div>
+            <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 24px; box-shadow: var(--shadow-sm); position: sticky; top: 90px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">Order Review</h3>
+
+              <div id="checkoutOrderReview">
+                <!-- Injected via orders.js initCheckoutPage() -->
+              </div>
+
+              <div style="margin-top: 24px;">
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="confirmOrderBtn">
+                  Confirm Order & Get Token →
+                </button>
+              </div>
+
+              <div style="margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+                ⚡ Token will be issued instantly and sent to kitchen display
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusBite – College Canteen Pre-Order System</div>
+        <div><a href="/menu.html">Back to Menu</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/orders.js"></script>
+</body>
+</html>

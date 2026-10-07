@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – CampusBite Canteen</title>
+  <meta name="description" content="Canteen staff overview dashboard with live order tracking and hourly distribution." />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Dark Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h2>CampusBite</h2>
+          <span class="brand-badge">Canteen Staff</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard.html" class="nav-item active">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/admin/orders.html" class="nav-item">
+          <span class="icon">📋</span>
+          <span>Orders</span>
+        </a>
+        <a href="/admin/menu.html" class="nav-item">
+          <span class="icon">🍔</span>
+          <span>Menu Items</span>
+        </a>
+        <a href="/admin/menu.html#categories" class="nav-item">
+          <span class="icon">🏷️</span>
+          <span>Categories</span>
+        </a>
+        <a href="/admin/orders.html#students" class="nav-item">
+          <span class="icon">👨‍🎓</span>
+          <span>Students</span>
+        </a>
+        <a href="/admin/reports.html" class="nav-item">
+          <span class="icon">📈</span>
+          <span>Reports & Trends</span>
+        </a>
+        <a href="/admin/dashboard.html#settings" class="nav-item" onclick="showToast('Canteen timings: 08:00 AM - 05:30 PM (Active)', 'info')">
+          <span class="icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div>
+            <div class="user-name">Chef Manager</div>
+            <div class="user-role">Counter 1 & 2 Station</div>
+          </div>
+          <a href="/login.html" title="Sign Out" style="color: #EF4444; text-decoration: none; font-size: 1.1rem;">⏻</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <h1>Canteen Control Console</h1>
+          <p>Real-time order ingestion, kitchen preparation, and counter pickups</p>
+        </div>
+
+        <div class="header-right">
+          <a href="/menu.html" target="_blank" class="btn-storefront-view">
+            <span>Student App Preview ↗</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <!-- Metric Cards Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card today-orders">
+            <div class="metric-title">Today's Orders</div>
+            <div class="metric-value" id="metricTodayOrders">0</div>
+            <div class="metric-trend">↑ 14% vs yesterday</div>
+          </div>
+
+          <div class="metric-card pending-orders">
+            <div class="metric-title">Pending Orders</div>
+            <div class="metric-value" id="metricPendingOrders" style="color: var(--amber);">0</div>
+            <div class="metric-trend" style="color: var(--amber);">Kitchen cooking queue</div>
+          </div>
+
+          <div class="metric-card ready-orders">
+            <div class="metric-title">Ready for Pickup</div>
+            <div class="metric-value" id="metricReadyOrders" style="color: var(--green);">0</div>
+            <div class="metric-trend" style="color: var(--green);">Counter 2 waiting</div>
+          </div>
+
+          <div class="metric-card today-revenue">
+            <div class="metric-title">Today's Revenue</div>
+            <div class="metric-value" id="metricTodayRevenue" style="color: var(--orange);">₹0</div>
+            <div class="metric-trend">Total billing today</div>
+          </div>
+        </div>
+
+        <!-- Orders Per Hour Chart (Chart.js) -->
+        <div class="admin-card">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">Orders Distribution Per Hour</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Visualizing canteen break rush hours (Break 1: 10:30 AM & Lunch: 12:30 PM)</p>
+            </div>
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--orange); background: var(--orange-light); padding: 4px 10px; border-radius: 6px;">Live Today</span>
+          </div>
+
+          <div class="chart-wrap" style="height: 300px;">
+            <canvas id="ordersPerHourChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Incoming Orders Table -->
+        <div class="admin-card">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">Active Orders Queue</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Update status here to immediately update student live tracking screens</p>
+            </div>
+            <a href="/admin/orders.html" class="admin-btn admin-btn-outline" style="font-size: 0.85rem;">View Full Order Log →</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Student Info</th>
+                  <th>Ordered Items</th>
+                  <th>Amount</th>
+                  <th>Order Time</th>
+                  <th>Action / Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminRecentOrdersBody">
+                <!-- Rendered by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

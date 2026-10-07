@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders – CampusBite</title>
+  <meta name="description" content="View your past and active college canteen pre-orders and tokens." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="/index.html" class="brand-logo">
+        <div class="brand-icon">🍽️</div>
+        <span>Campus<span class="accent">Bite</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/menu.html" class="nav-link">Menu</a></li>
+        <li><a href="/orders.html" class="nav-link active">My Orders</a></li>
+        <li><a href="/profile.html" class="nav-link nav-auth-link">Profile</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/cart.html" class="cart-btn" aria-label="View Cart Tray">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+        <a href="/menu.html" class="btn btn-primary btn-sm">+ New Order</a>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: 36px; padding-bottom: 60px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+        <div>
+          <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">My Pre-Orders</h1>
+          <p style="color: var(--text-muted); font-size: 1rem;">
+            Real-time tokens and pickup status for your canteen meals.
+          </p>
+        </div>
+        <a href="/menu.html" class="btn btn-outline btn-sm">+ Order More Food</a>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state-card" id="ordersEmptyState" style="display: none;">
+        <span class="empty-state-emoji">📋</span>
+        <h3 class="empty-state-title">No orders yet.</h3>
+        <p class="empty-state-text">Your orders will appear here once you choose food from the menu.</p>
+        <a href="/menu.html" class="btn btn-primary btn-lg">Explore Canteen Menu →</a>
+      </div>
+
+      <!-- Orders Container -->
+      <div class="order-history-grid" id="myOrdersContainer">
+        <!-- Injected via OrderManager.renderOrdersPage() in js/orders.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusBite – College Canteen Pre-Order System</div>
+        <div><a href="/admin/dashboard.html">Admin Portal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/orders.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Orders – CampusBite Admin</title>
+  <meta name="description" content="Live order counter management for college canteen staff." />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Dark Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h2>CampusBite</h2>
+          <span class="brand-badge">Canteen Staff</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard.html" class="nav-item">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/admin/orders.html" class="nav-item active">
+          <span class="icon">📋</span>
+          <span>Orders</span>
+        </a>
+        <a href="/admin/menu.html" class="nav-item">
+          <span class="icon">🍔</span>
+          <span>Menu Items</span>
+        </a>
+        <a href="/admin/reports.html" class="nav-item">
+          <span class="icon">📈</span>
+          <span>Reports & Trends</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div>
+            <div class="user-name">Chef Manager</div>
+            <div class="user-role">Canteen Staff</div>
+          </div>
+          <a href="/login.html" title="Sign Out" style="color: #EF4444; text-decoration: none; font-size: 1.1rem;">⏻</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <h1>Live Orders Management</h1>
+          <p>Instant status updating synced in real-time with student screens</p>
+        </div>
+
+        <div class="header-right">
+          <a href="/menu.html" target="_blank" class="btn-storefront-view">
+            <span>Student App Preview ↗</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <div class="admin-card">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">All Canteen Orders</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Change status below to progress order from Placed → Preparing → Ready → Collected</p>
+            </div>
+
+            <!-- Filter Status Dropdown -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="adminFilterStatus" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Filter By Status:</label>
+              <select id="adminFilterStatus" class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
+                <option value="ALL">All Orders</option>
+                <option value="ORDER PLACED">Pending (Placed)</option>
+                <option value="PREPARING">Preparing</option>
+                <option value="READY">Ready For Pickup</option>
+                <option value="COLLECTED">Collected</option>
+                <option value="CANCELLED">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Student Info</th>
+                  <th>Ordered Items</th>
+                  <th>Total Amount</th>
+                  <th>Time / Pickup Slot</th>
+                  <th>Payment</th>
+                  <th>Update Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminAllOrdersBody">
+                <!-- Rendered by js/admin.js initOrdersPage() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
